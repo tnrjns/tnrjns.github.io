@@ -31,17 +31,19 @@
     .cursor {
       position: fixed;
       width: 10px; height: 10px;
-      background: var(--accent);
+      background: #ffffff;
       border-radius: 50%;
       pointer-events: none;
       z-index: 9999;
       transform: translate(-50%, -50%);
       transition: transform 0.1s, width 0.2s, height 0.2s;
+      mix-blend-mode: difference;
     }
     .cursor.expand {
       width: 40px; height: 40px;
-      background: transparent;
-      border: 1px solid var(--accent);
+      background: #ffffff;
+      border: 1px solid #ffffff;
+      mix-blend-mode: difference;
     }
 
     /* NAV */
@@ -519,7 +521,7 @@
     <div class="contact-row">
       <h2 class="contact-title">Let's<br>make<br>something<br><span>real.</span></h2>
       <!-- Replace href with mailto:youremail@gmail.com -->
-      <a class="contact-link" href="mailto:tanir@mailum.com">Send a message →</a>
+      <a class="contact-link" href="/cdn-cgi/l/email-protection#96e2f7f8ffe4d6fbf7fffae3fbb8f5f9fb">Send a message →</a>
     </div>
   </section>
 
@@ -528,7 +530,7 @@
     <span>Video Editor</span>
   </footer>
 
-  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
     // Custom cursor
     const cursor = document.getElementById('cursor');
     document.addEventListener('mousemove', e => {
@@ -550,6 +552,4 @@
       });
     }, { threshold: 0.1 });
 
-    document.querySelectorAll('.video-card, .about-grid, .contact-row').forEach(el => {
-      el.style.opacity = '0';
-      el.style.transform = 'tra
+  
