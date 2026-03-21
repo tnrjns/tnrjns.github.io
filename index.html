@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>EDITS — Portfolio</title>
+  <title>موحد — Portfolio</title>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet"/>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -11,8 +11,7 @@
     :root {
       --bg: #080808;
       --fg: #e8e8e8;
-      --accent: #8b0000;
-      --muted: #444;
+      --muted: #555;
       --card-bg: #111;
     }
 
@@ -28,22 +27,25 @@
     }
 
     /* Custom cursor */
-    .cursor {
+    #cursor {
       position: fixed;
-      width: 10px; height: 10px;
+      top: 0;
+      left: 0;
+      width: 12px;
+      height: 12px;
       background: #ffffff;
       border-radius: 50%;
       pointer-events: none;
-      z-index: 9999;
+      z-index: 99999;
       transform: translate(-50%, -50%);
-      transition: transform 0.1s, width 0.2s, height 0.2s;
-      mix-blend-mode: difference;
+      transition: width 0.15s ease, height 0.15s ease, background 0.15s ease;
     }
-    .cursor.expand {
-      width: 40px; height: 40px;
-      background: #ffffff;
-      border: 1px solid #ffffff;
-      mix-blend-mode: difference;
+
+    #cursor.expand {
+      width: 36px;
+      height: 36px;
+      background: rgba(255,255,255,0.1);
+      border: 1.5px solid #ffffff;
     }
 
     /* NAV */
@@ -55,13 +57,13 @@
       justify-content: space-between;
       align-items: center;
       padding: 28px 48px;
-      mix-blend-mode: difference;
     }
 
     .nav-logo {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 1.4rem;
-      letter-spacing: 0.15em;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 400;
+      letter-spacing: 0.05em;
       color: var(--fg);
       text-decoration: none;
     }
@@ -78,7 +80,7 @@
       font-size: 0.75rem;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      opacity: 0.6;
+      opacity: 0.5;
       transition: opacity 0.2s;
     }
 
@@ -98,8 +100,8 @@
     .hero-bg {
       position: absolute;
       inset: 0;
-      background: radial-gradient(ellipse at 70% 40%, #1a0000 0%, transparent 60%),
-                  radial-gradient(ellipse at 20% 80%, #0a0000 0%, transparent 50%);
+      background: radial-gradient(ellipse at 70% 40%, #1a1a1a 0%, transparent 60%),
+                  radial-gradient(ellipse at 20% 80%, #121212 0%, transparent 50%);
       z-index: 0;
     }
 
@@ -116,7 +118,7 @@
       font-size: 0.7rem;
       letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: var(--accent);
+      color: var(--fg);
       margin-bottom: 20px;
       position: relative;
       z-index: 2;
@@ -135,35 +137,14 @@
       animation: fadeUp 0.8s 0.4s forwards;
     }
 
-    .hero-title span {
-      color: var(--accent);
-      display: inline-block;
-    }
-
-    .hero-sub {
-      margin-top: 32px;
-      font-size: 0.9rem;
-      opacity: 0.45;
-      max-width: 380px;
-      line-height: 1.7;
-      position: relative;
-      z-index: 2;
-      opacity: 0;
-      animation: fadeUp 0.8s 0.6s forwards;
-    }
-
     .hero-scroll {
       position: absolute;
       right: 48px;
       bottom: 64px;
       z-index: 2;
-      display: flex;
-      align-items: center;
-      gap: 12px;
       font-size: 0.65rem;
       letter-spacing: 0.15em;
       text-transform: uppercase;
-      opacity: 0.4;
       writing-mode: vertical-rl;
       opacity: 0;
       animation: fadeIn 1s 1s forwards;
@@ -180,15 +161,14 @@
     }
 
     /* SECTION */
-    section {
-      padding: 120px 48px;
-    }
+    section { padding: 120px 48px; }
 
     .section-label {
       font-size: 0.65rem;
       letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: var(--accent);
+      color: var(--fg);
+      opacity: 0.4;
       margin-bottom: 60px;
       display: flex;
       align-items: center;
@@ -200,8 +180,8 @@
       flex: 1;
       max-width: 80px;
       height: 1px;
-      background: var(--accent);
-      opacity: 0.4;
+      background: var(--fg);
+      opacity: 0.3;
     }
 
     /* VIDEO GRID */
@@ -216,7 +196,6 @@
       aspect-ratio: 16/9;
       background: var(--card-bg);
       overflow: hidden;
-      group: true;
     }
 
     .video-card iframe {
@@ -245,40 +224,9 @@
       transform: translateY(0);
     }
 
-    /* FEATURED — big card */
     .video-card.featured {
       grid-column: 1 / -1;
       aspect-ratio: 21/9;
-    }
-
-    /* placeholder state */
-    .video-placeholder {
-      width: 100%;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
-      color: var(--muted);
-      border: 1px dashed #222;
-      font-size: 0.75rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      cursor: pointer;
-      transition: border-color 0.2s, color 0.2s;
-      background: #0c0c0c;
-    }
-
-    .video-placeholder:hover {
-      border-color: var(--accent);
-      color: var(--accent);
-    }
-
-    .video-placeholder .plus {
-      font-size: 2rem;
-      font-weight: 200;
-      line-height: 1;
     }
 
     /* ABOUT */
@@ -312,7 +260,7 @@
     .stat-num {
       font-family: 'Bebas Neue', sans-serif;
       font-size: 3.5rem;
-      color: var(--accent);
+      color: var(--fg);
       line-height: 1;
     }
 
@@ -339,8 +287,6 @@
       line-height: 0.9;
     }
 
-    .contact-title span { color: var(--accent); }
-
     .contact-link {
       display: inline-block;
       padding: 16px 36px;
@@ -350,13 +296,12 @@
       font-size: 0.7rem;
       letter-spacing: 0.15em;
       text-transform: uppercase;
-      transition: background 0.2s, color 0.2s, border-color 0.2s;
+      transition: background 0.2s, color 0.2s;
       white-space: nowrap;
     }
 
     .contact-link:hover {
-      background: var(--accent);
-      border-color: var(--accent);
+      background: var(--fg);
       color: var(--bg);
     }
 
@@ -373,16 +318,14 @@
       opacity: 0.3;
     }
 
-    /* DIVIDER */
     .divider {
       height: 1px;
       background: #1a1a1a;
       margin: 0 48px;
     }
 
-    /* RESPONSIVE */
     @media (max-width: 768px) {
-      nav { padding: 24px 24px; }
+      nav { padding: 24px; }
       .hero { padding: 0 24px 48px; }
       section { padding: 80px 24px; }
       .grid { grid-template-columns: 1fr; }
@@ -397,11 +340,10 @@
 </head>
 <body>
 
-  <div class="cursor" id="cursor"></div>
+  <div id="cursor"></div>
 
-  <!-- NAV -->
   <nav>
-    <a class="nav-logo" href="#">Tanner Jensen</a>
+    <a class="nav-logo" href="#">موحد</a>
     <ul class="nav-links">
       <li><a href="#work">Work</a></li>
       <li><a href="#about">About</a></li>
@@ -409,54 +351,35 @@
     </ul>
   </nav>
 
-  <!-- HERO -->
   <div class="hero">
     <div class="hero-bg"></div>
     <div class="hero-grain"></div>
     <p class="hero-eyebrow">Portfolio</p>
-    <h1 class="hero-title">MY<br><span>EDITS.</span></h1>
-    <p class="hero-sub">my work over the last few years</p>
+    <h1 class="hero-title">MY<br>EDITS.</h1>
     <div class="hero-scroll">Scroll</div>
   </div>
 
   <div class="divider"></div>
 
-  <!-- WORK -->
   <section id="work">
     <div class="section-label">Selected Work</div>
-
     <div class="grid">
 
-      <!-- VIDEO 1 — FEATURED -->
       <div class="video-card featured">
-        <iframe
-          src="https://www.youtube.com/embed/aarO0U-Nc7I"
-          title="Edit 1"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen>
-        </iframe>
+        <iframe src="https://www.youtube.com/embed/aarO0U-Nc7I" title="Edit 1"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         <div class="card-label">Edit 1</div>
       </div>
 
-      <!-- VIDEO 2 -->
       <div class="video-card">
-        <iframe
-          src="https://www.youtube.com/embed/kuH2_3rYrNI"
-          title="Edit 2"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen>
-        </iframe>
+        <iframe src="https://www.youtube.com/embed/kuH2_3rYrNI" title="Edit 2"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         <div class="card-label">Edit 2</div>
       </div>
 
-      <!-- VIDEO 3 -->
       <div class="video-card">
-        <iframe
-          src="https://www.youtube.com/embed/h8QvW6CJFQM"
-          title="Edit 3"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen>
-        </iframe>
+        <iframe src="https://www.youtube.com/embed/h8QvW6CJFQM" title="Edit 3"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         <div class="card-label">Edit 3</div>
       </div>
 
@@ -465,7 +388,6 @@
 
   <div class="divider"></div>
 
-  <!-- ABOUT -->
   <section id="about">
     <div class="section-label">About</div>
     <div class="about-grid">
@@ -474,7 +396,6 @@
       </div>
       <div>
         <p class="about-body">
-          <!-- Edit this text to describe yourself -->
           I'm a video editor focused on cinematic storytelling, rhythm, and emotion. Every cut is intentional. Every frame matters.
           <br><br>
           I work across music videos, short films, highlight reels, and creative projects. Hit me up if you want something built different.
@@ -494,15 +415,10 @@
           </div>
           <div>
             <div class="stat-num">
-              <!-- CapCut logo in red -->
               <svg width="48" height="48" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <!-- Outer ring -->
-                <circle cx="50" cy="50" r="44" stroke="#8b0000" stroke-width="7" fill="none"/>
-                <!-- Inner circle -->
-                <circle cx="50" cy="50" r="22" fill="#8b0000"/>
-                <!-- Cut gap top -->
+                <circle cx="50" cy="50" r="44" stroke="#e8e8e8" stroke-width="7" fill="none"/>
+                <circle cx="50" cy="50" r="22" fill="#e8e8e8"/>
                 <rect x="43" y="4" width="14" height="18" fill="#080808"/>
-                <!-- Cut gap bottom -->
                 <rect x="43" y="78" width="14" height="18" fill="#080808"/>
               </svg>
             </div>
@@ -515,36 +431,36 @@
 
   <div class="divider"></div>
 
-  <!-- CONTACT -->
   <section id="contact">
     <div class="section-label">Get In Touch</div>
     <div class="contact-row">
-      <h2 class="contact-title">Let's<br>make<br>something<br><span>real.</span></h2>
-      <!-- Replace href with mailto:youremail@gmail.com -->
-      <a class="contact-link" href="/cdn-cgi/l/email-protection#96e2f7f8ffe4d6fbf7fffae3fbb8f5f9fb">Send a message →</a>
+      <h2 class="contact-title">Let's<br>make<br>something<br>real.</h2>
+      <a class="contact-link" href="#">Send a message →</a>
     </div>
   </section>
 
   <footer>
-    <span>© 2026 Tanner Jensen — All Rights Reserved</span>
+    <span>© 2026 موحد — All Rights Reserved</span>
     <span>Video Editor</span>
   </footer>
 
-  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-    // Custom cursor
+  <script>
+    // Cursor
     const cursor = document.getElementById('cursor');
-    document.addEventListener('mousemove', e => {
+
+    document.addEventListener('mousemove', function(e) {
       cursor.style.left = e.clientX + 'px';
       cursor.style.top = e.clientY + 'px';
     });
-    document.querySelectorAll('a, iframe, .video-card').forEach(el => {
-      el.addEventListener('mouseenter', () => cursor.classList.add('expand'));
-      el.addEventListener('mouseleave', () => cursor.classList.remove('expand'));
+
+    document.querySelectorAll('a, .video-card').forEach(function(el) {
+      el.addEventListener('mouseenter', function() { cursor.classList.add('expand'); });
+      el.addEventListener('mouseleave', function() { cursor.classList.remove('expand'); });
     });
 
-    // Fade in on scroll
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
+    // Scroll fade in
+    const observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
         if (entry.isIntersecting) {
           entry.target.style.opacity = '1';
           entry.target.style.transform = 'translateY(0)';
@@ -552,4 +468,12 @@
       });
     }, { threshold: 0.1 });
 
-  
+    document.querySelectorAll('.video-card, .about-grid, .contact-row').forEach(function(el) {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(24px)';
+      el.style.transition = 'opacity 0.7s ease, transform 0.7s ease';
+      observer.observe(el);
+    });
+  </script>
+</body>
+</html>
